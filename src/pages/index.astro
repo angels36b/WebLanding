@@ -6,7 +6,7 @@ import Layout from "../layouts/Layout.astro";
 	<main>
 		
 
-		<header class="py-5 px-10 flex items-center fixed top-0 w-full justify-between">
+		<header class="py-5 px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white">
 			<div class="flex flex-grow basis-0">
 				<svg
 					class=" h-6 w-32"
@@ -24,7 +24,7 @@ import Layout from "../layouts/Layout.astro";
 			</div>
 
 			<nav>
-				<ul class="flex text-sm [&>li>a]: inline-block [&>li>a]:px-4 [&>li>a]:py-2">
+				<ul class="flex text-sm [&>li>a]:text-white [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2">
 					<li><a href="">Model S</a></li>
 					<li><a href="">Model 3</a></li>
 					<li><a href="">MOdel X</a></li>
@@ -36,7 +36,7 @@ import Layout from "../layouts/Layout.astro";
 			</nav>
 
 			<nav class="flex flex-grow justify-end basis-0">
-				<ul class="flex  text-sm [&>li>a]: inline-block [&>li>a]:px-4 [&>li>a]:py-2">
+				<ul class="flex text-sm [&>li>a]:text-white [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2">
 					<li><a href="">Soporte</a></li>
 					<li><a href="">Tienda</a></li>
 					<li><a href="">Cuenta</a></li>
@@ -45,5 +45,25 @@ import Layout from "../layouts/Layout.astro";
 				</ul>
 			</nav>
 		</header>
+
+		<section class="bg-black h-screen w-screen text-center relative overflow-hidden"> 
+			No tiene nada
+		<header class="z-30 relative"> 
+
+			<h2 class="text-white pt-40 text-5l font-medium"> Disfrute de tesla</h2>
+			<p class="text-white test-base">Programe una prueba de conducción</p>
+	
+</header>
+
+	
+<footer>
+  <a href="#"> prueba de conducción </a>
+
+</footer>
+			<div class="absolute top-0 bottom-0">
+				<video autoplay muted loop src="/video.webm""> </video>
+			</div>
+		</section>
+		
 	</main>
 </Layout>
