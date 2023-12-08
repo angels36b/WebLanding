@@ -6,7 +6,20 @@ import HeroSection from "../components/HeroSection.astro";
 
 <Layout title="Tesla">
 	<main>
-	<LandingHeader />
-	<HeroSection />
+		<LandingHeader />
+
+		<main
+			class="snap-y snap-mandatory relative w-full h-screen overflow-auto"
+		>
+			<div class="snap-center">
+				<HeroSection />
+			</div>
+			<div class="snap-center">
+				<HeroSection />
+			</div>
+			<div class="snap-center">
+				<HeroSection />
+			</div>
+		</main>
 	</main>
 </Layout>
