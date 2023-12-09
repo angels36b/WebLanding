@@ -1,34 +1,104 @@
 ---
 import Logo from "./Logo.astro";
 ---
+
 <header
-class="py-5 px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white"
+    id="landing-header"
+    class="py-5 px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white"
 >
-<div class="flex flex-grow basis-0">
-    <Logo />
-</div>
+    <div class="flex flex-grow basis-0">
+        <Logo />
+    </div>
 
-<nav>
-    <ul
-        class="flex text-sm [&>li>a]:text-white [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
-    >
-        <li><a href="">Model S</a></li>
-        <li><a href="">Model 3</a></li>
-        <li><a href="">MOdel X</a></li>
-        <li><a href="">Model Y</a></li>
-        <li><a href="">Powerwall</a></li>
-        <li><a href="">Carga</a></li>
-    </ul>
-</nav>
+    <nav>
+        <ul
+            class="flex text-sm [&>li>a]:text-current [&>li>a]:font-bold [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
+        >
+            <li><a href="">Model S</a></li>
+            <li><a href="">Model 3</a></li>
+            <li><a href="">MOdel X</a></li>
+            <li><a href="">Model Y</a></li>
+            <li><a href="">Powerwall</a></li>
+            <li><a href="">Carga</a></li>
+        </ul>
+    </nav>
 
-<nav class="flex flex-grow justify-end basis-0">
-    <ul
-        class="flex text-sm [&>li>a]:text-white [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
+    <nav class="flex flex-grow justify-end basis-0">
+        <ul
+            class="flex text-sm [&>li>a]:text-current [&>li>a]:font-bold [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
+        >
+            <li><a href="">Soporte</a></li>
+            <li><a href="">Tienda</a></li>
+            <li><a href="">Cuenta</a></li>
+            <li><a href="">Menú</a></li>
+        </ul>
+    </nav>
+
+    <div
+        id="menu-backdrop"
+        class="
+    absolue bg-black/5 backdrop-blur-lg rounded
+    left-[var(--left)] top-[var(--top)]
+    w-[var(--width)] h-[var(--height)]
+    transition-all duration-300
+    ease-in-out opacity-0 -z-10"
     >
-        <li><a href="">Soporte</a></li>
-        <li><a href="">Tienda</a></li>
-        <li><a href="">Cuenta</a></li>
-        <li><a href="">Menú</a></li>
-    </ul>
-</nav>
+    </div>
 </header>
+
+<script>
+    // recupera el landing header
+    const listItems = document.querySelectorAll("#landing-header li");
+    // recupera el menu backdrop para poder manipularlo con js y css variables custom properties
+    const menuBackdrop = document.querySelector(
+        "#menu-backdrop",
+    ) as HTMLElement;
+    // recorre cada item de la lista y le agrega un evento mouse enter para que se ejecute cuando el mouse entre en el elemento y se ejecute la funcion
+    listItems.forEach((item) => {
+        item.addEventListener("mouseenter", () => {
+            const { left, top, width, height } = item.getBoundingClientRect();
+            const { clientHeight, clientWidth } = item;
+
+            console.log({ left, top, width, height });
+            console.log({ clientHeight, clientWidth });
+
+            menuBackdrop.style.setProperty("--left", `${left}px`);
+            menuBackdrop.style.setProperty("--top", `${top}px`);
+            menuBackdrop.style.setProperty("--width", `${width}px`);
+            menuBackdrop.style.setProperty("--height", `${height}px`);
+
+            menuBackdrop.style.opacity= "1";
+            menuBackdrop.style.visibility = "visible";
+        });
+
+        item.addEventListener("mouseleave", () => {
+            menuBackdrop.style.opacity= "0";
+            menuBackdrop.style.visibility = "hidden";
+        })
+    });
+</script>
+
+<!-- se usa el metodo intercepcion observer para detectar cual elemento esta en viewport -->
+<script>
+    const $header = document.querySelector("#landing-header") as HTMLElement;
+
+    const observerOptions = {
+        root: null, // es el elemento que se va a observar, si es null se usa el viewport del navegador
+        rootMargin: "0px", // margen del elemento que se va a observar
+        threshold: 0.5, // porcentaje de visibilidad del elemento que se va a observar
+    };
+
+    // creamos el observador, el que se encarga de observar los elementos
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            const { isIntersecting } = entry;
+            if (isIntersecting) {
+                const color = entry.target.getAttribute("data-header-color");
+                $header.style.color = color;
+            }
+        });
+    }, observerOptions);
+
+    const $sections = document.querySelectorAll(".landing-section");
+    $sections.forEach((section) => observer.observe(section));
+</script>
