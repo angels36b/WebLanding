@@ -4,7 +4,7 @@ import Logo from "./Logo.astro";
 
 <header
     id="landing-header"
-    class="py-5 px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white"
+    class="py-3 px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white"
 >
     <div class="flex flex-grow basis-0">
         <Logo />
@@ -36,12 +36,12 @@ import Logo from "./Logo.astro";
 
     <div
         id="menu-backdrop"
-        class="
-    absolue bg-black/5 backdrop-blur-lg rounded
-    left-[var(--left)] top-[var(--top)]
-    w-[var(--width)] h-[var(--height)]
-    transition-all duration-300
-    ease-in-out opacity-0 -z-10"
+        class={`
+           absolue bg-black/10 backdrop-blur-lg rounded 
+            left-[var(--left)] top-[var(--top)
+            w-[var(--width)] h-[var(--height)]
+             transition-all 
+            duration-300 ease-in-out opacity-0 -z-10`}
     >
     </div>
 </header>
@@ -67,14 +67,14 @@ import Logo from "./Logo.astro";
             menuBackdrop.style.setProperty("--width", `${width}px`);
             menuBackdrop.style.setProperty("--height", `${height}px`);
 
-            menuBackdrop.style.opacity= "1";
+            menuBackdrop.style.opacity = "1";
             menuBackdrop.style.visibility = "visible";
         });
 
         item.addEventListener("mouseleave", () => {
-            menuBackdrop.style.opacity= "0";
+            menuBackdrop.style.opacity = "0";
             menuBackdrop.style.visibility = "hidden";
-        })
+        });
     });
 </script>
 
@@ -85,7 +85,7 @@ import Logo from "./Logo.astro";
     const observerOptions = {
         root: null, // es el elemento que se va a observar, si es null se usa el viewport del navegador
         rootMargin: "0px", // margen del elemento que se va a observar
-        threshold: 0.5, // porcentaje de visibilidad del elemento que se va a observar
+        threshold: 0.9, // porcentaje de visibilidad del elemento que se va a observar
     };
 
     // creamos el observador, el que se encarga de observar los elementos
