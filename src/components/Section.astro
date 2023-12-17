@@ -1,11 +1,13 @@
 ---
-const { color, title, subtitle } = Astro.props;
+const { id, color, title, subtitle } = Astro.props;
 const textColor = `text-${color}`;
 ---
 
 
-<section class="landing-section bd-black h-screen relative text-center overflow-hidden"
-        data-header-color={color}
+<section 
+    class="landing-section bd-black h-screen relative text-center overflow-hidden"
+    data-header-color={color}
+    id={id}
 >
     <div class="z-30 relative h-full flex flex-col">
         <header>
@@ -13,13 +15,14 @@ const textColor = `text-${color}`;
                 { title }
             </h2>
             <p class={`${textColor} text-sm`}>
-                {subtitle}
+                { subtitle }
             </p>
         </header>
 
-        <footer class="pb-24 text-[10px] flex flex-grow flex-col justify-end">
+        <footer class="flex flex-grow flex-col justify-end">
             <div>
-                <slot name="footer"/>               
+                <slot name="footer"/>    
+
             </div>
         </footer>
     </div>
