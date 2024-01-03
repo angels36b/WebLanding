@@ -1,107 +1,95 @@
 ---
-import Logo from "./Logo.astro";
+import Logo from "./Logo.astro"
 ---
 
 <header
-    id="landing-header"
-    class="py-3 px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white"
+  id="landing-header"
+  class="py-3 px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white"
 >
-    <div class="flex flex-grow basis-0">
-        <a href="./"> <Logo/> </a>
-    </div>
+  <div class="flex flex-grow basis-0">
+    <a href="./"><Logo /></a>
+  </div>
 
-    <nav class="hidden xl:block sm:hidden">
-
-        <ul
-            class="flex text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
-        >
-            <li><a href="">Model S</a></li>
-            <li><a href="">Model 3</a></li>
-            <li><a href="">MOdel X</a></li>
-            <li><a href="">Model Y</a></li>
-            <li><a href="">Powerwall</a></li>
-            <li><a href="">Carga</a></li>
-        </ul>
-    </nav>
-
-    <nav class="flex flex-grow justify-end basis-0">
-        <ul
-            class="flex text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
-        >
-            
-            <li><a href="">Tienda</a></li>
-            <li><a href="">Cuenta</a></li>
-            <li><a href="">Menú</a></li>
-        </ul>
-    </nav>
-
-    <div
-        id="menu-backdrop"
-        class={`
-           absolute bg-black/5 backdrop-blur-lg rounded 
-           translate-x-[var(--left)] translate-y-[var(--top)]
-           left-0 top-0
-            w-[var(--width)] h-[var(--height)]
-             transition-all duration-500 
-             ease-in-out opacity-0 -z-10
-             `}
+  <nav class="hidden xl:block sm:hidden">
+    <ul
+      class="flex text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
     >
-    </div>
+      <li><a href="#model-s">Model S</a></li>
+      <li><a href="#model-3">Model 3</a></li>
+      <li><a href="#model-x">Model X</a></li>
+      <li><a href="#model-y">Model Y</a></li>
+      <li><a href="#powerwall">Powerwall</a></li>
+      <li><a href="#accesorios">Carga</a></li>
+    </ul>
+  </nav>
+
+  <nav class="flex flex-grow justify-end basis-0">
+    <ul
+      class="flex text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
+    >
+      <li class="hidden xl:block sm:hidden"><a href="#">Tienda</a></li>
+      <li class="hidden xl:block sm:hidden"><a href="#">Cuenta</a></li>
+      <li><a href="#">Menú</a></li>
+    </ul>
+  </nav>
+
+  <div
+    id="menu-backdrop"
+    class={`
+      absolute bg-black/5 backdrop-blur-lg rounded
+      translate-x-[var(--left)] translate-y-[var(--top)]
+      left-0 top-0
+      w-[var(--width)] h-[var(--height)]
+      transition-all duration-500
+      ease-in-out opacity-0 -z-10
+    `}
+  >
+  </div>
 </header>
 
 <script>
-    // recupera el landing header
-    const listItems = document.querySelectorAll("#landing-header li");
-    // recupera el menu backdrop para poder manipularlo con js y css variables custom properties
-    const menuBackdrop = document.querySelector(
-        "#menu-backdrop",
-    ) as HTMLElement;
-    // recorre cada item de la lista y le agrega un evento mouse enter para que se ejecute cuando el mouse entre en el elemento y se ejecute la funcion
-    listItems.forEach((item) => {
-        item.addEventListener("mouseenter", () => {
-            const { left, top, width, height } = item.getBoundingClientRect();
-            const { clientHeight, clientWidth } = item;
+  const listItem = document.querySelectorAll("#landing-header li")
+  const menuBackDrop = document.querySelector("#menu-backdrop") as HTMLElement
 
-            console.log({ left, top, width, height });
-            console.log({ clientHeight, clientWidth });
+  listItem.forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+      const { left, top, width, height } = item.getBoundingClientRect()
 
-            menuBackdrop.style.setProperty("--left", `${left}px`);
-            menuBackdrop.style.setProperty("--top", `${top}px`);
-            menuBackdrop.style.setProperty("--width", `${width}px`);
-            menuBackdrop.style.setProperty("--height", `${height}px`);
+      menuBackDrop.style.setProperty("--left", `${left}px`)
+      menuBackDrop.style.setProperty("--top", `${top}px`)
+      menuBackDrop.style.setProperty("--width", `${width}px`)
+      menuBackDrop.style.setProperty("--height", `${height}px`)
 
-            menuBackdrop.style.opacity = "1";
-            menuBackdrop.style.visibility = "visible";
-        });
+      menuBackDrop.style.opacity = "1"
+      menuBackDrop.style.visibility = "visible"
+    })
 
-        item.addEventListener("mouseleave", () => {
-            menuBackdrop.style.opacity = "0";
-            menuBackdrop.style.visibility = "hidden";
-        });
-    });
+    item.addEventListener("mouseleave", () => {
+      menuBackDrop.style.opacity = "0"
+      menuBackDrop.style.visibility = "hidden"
+    })
+  })
 </script>
 
-<!-- se usa el metodo intercepcion observer para detectar cual elemento esta en viewport -->
 <script>
-    const $header = document.querySelector("#landing-header") as HTMLElement;
+  const headerEl = document.querySelector("#landing-header") as HTMLElement
 
-    const observerOptions = {
-        root: null, // es el elemento que se va a observar, si es null se usa el viewport del navegador
-        rootMargin: "0px", // margen del elemento que se va a observar
-        threshold: 0.9, // porcentaje de visibilidad del elemento que se va a observar
-    };
+  const observerOptions = {
+    root: null,
+    rootMargin: "0px", // en cuanto se vea el elemento
+    threshold: 0.9, // porcentaje de visibilidad
+  }
 
-    // creamos el observador, el que se encarga de observar los elementos
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            const { isIntersecting } = entry;
-            if (isIntersecting) {
-                const color = entry.target.getAttribute("data-header-color");
-                $header.style.color = color;
-            }
-        });
-    }, observerOptions);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const { isIntersecting } = entry
+      if (isIntersecting) {
+        const color = entry.target.getAttribute("data-header-color")
+        headerEl.style.color = color
+      }
+    })
+  }, observerOptions)
 
-    const $sections = document.querySelectorAll(".landing-section");
-    $sections.forEach((section) => observer.observe(section));
+  const sectionElements = document.querySelectorAll(".landing-section")
+  sectionElements.forEach((section) => observer.observe(section))
 </script>
