@@ -6,6 +6,14 @@
       "name": "Development server",
       "request": "launch",
       "type": "node-terminal"
+    },
+    {
+      "name": "Launch Firefox",
+      "type": "firefox",
+      "request": "launch",
+      "reAttach": true,
+      "url": "http://localhost:3000", // Cambia la URL según tu aplicación
+      "webRoot": "${workspaceFolder}"
     }
   ]
 }
